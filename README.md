@@ -98,12 +98,12 @@ mqtt_comm_publish("escola/sala1/temperatura", (const uint8_t *)"26.5", strlen("2
 ```
 Subscribe no broker pela rede wi-fi:
 <p align="center">
-  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura1.png" width="361" height="378" alt="Figura 1" title="Subscribe no broker pela rede wi-fi">
+  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura1.png" width="764" height="297" alt="Figura 1" title="Subscribe no broker pela rede wi-fi">
 </p>
 
 Wireshark mostra conteúdo legível:
 <p align="center">
-  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura2.png" width="361" height="378" alt="Figura 2" title="Wireshark mostra conteúdo legível">
+  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura2.png" width="955" height="664" alt="Figura 2" title="Wireshark mostra conteúdo legível">
 </p>
 
 **Etapa 4: Autenticação básica no Mosquitto**
@@ -126,7 +126,7 @@ mosquitto_pub -h 192.168.86.10 -p 1883 -t "escola/sala1/temperatura" -u "aluno" 
 
 Publish não autorizado por falta de acesso:
 <p align="center">
-  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura3.png" width="361" height="378" alt="Figura 3" title="Publish não autorizado por falta de acesso">
+  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura3.png" width="956" height="267" alt="Figura 3" title="Publish não autorizado por falta de acesso">
 </p>
 
 **Etapa 5: Simulando criptografia leve (XOR)**
@@ -145,7 +145,7 @@ cp iot_security_lab.uf2 /media/$USER/RPI-RP2/
 
 Wireshark mostra conteúdo ofuscado:
 <p align="center">
-  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura4.png" width="361" height="378" alt="Figura 4" title="Wireshark mostra conteúdo ofuscado">
+  <img src="https://github.com/EmbarcaTech-2025/tarefa-iot-security-lab-sociedade-esportiva-embarcatech/raw/main/assets/figura4.png" width="954" height="667" alt="Figura 4" title="Wireshark mostra conteúdo ofuscado">
 </p>
 
 **Etapa 6: Proteção contra replay**
