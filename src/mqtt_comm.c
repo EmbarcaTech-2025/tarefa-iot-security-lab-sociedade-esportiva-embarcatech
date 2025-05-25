@@ -1,6 +1,5 @@
 #include "lwip/apps/mqtt.h"       // Biblioteca MQTT do lwIP
 #include "include/mqtt_comm.h"    // Header file com as declarações locais
-// Base: https://github.com/BitDogLab/BitDogLab-C/blob/main/wifi_button_and_led/lwipopts.h
 #include "lwipopts.h"             // Configurações customizadas do lwIP
 
 /* Variável global estática para armazenar a instância do cliente MQTT
@@ -81,14 +80,14 @@ static void mqtt_pub_request_cb(void *arg, err_t result) {
 void mqtt_comm_publish(const char *topic, const uint8_t *data, size_t len) {
     // Envia a mensagem MQTT
     err_t status = mqtt_publish(
-        client,              // Instância do cliente
-        topic,               // Tópico de publicação
-        data,                // Dados a serem enviados
-        len,                 // Tamanho dos dados
-        0,                   // QoS 0 (nenhuma confirmação)
-        0,                   // Não reter mensagem
-        mqtt_pub_request_cb, // Callback de confirmação
-        NULL                 // Argumento para o callback
+        client,              
+        topic,               
+        data,                
+        len,                 
+        0,                   
+        0,                   
+        mqtt_pub_request_cb, 
+        NULL                
     );
 
     if (status != ERR_OK) {

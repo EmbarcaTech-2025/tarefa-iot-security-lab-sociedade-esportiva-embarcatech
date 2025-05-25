@@ -5,49 +5,33 @@
 #include "include/wifi_conn.h"      // Funções personalizadas de conexão WiFi
 #include "include/mqtt_comm.h"      // Funções personalizadas para MQTT
 #include "include/xor_cipher.h"     // Funções de cifra XOR
+#include <stdio.h>
+#include <time.h>
 
-int main() {
-    // Inicializa todas as interfaces de I/O padrão (USB serial, etc.)
+#define wifi_ssid "Rede" 
+#define wifi_password "senha"
+
+int main()
+{
     stdio_init_all();
-    
-    // Conecta à rede WiFi
-    // Parâmetros: Nome da rede (SSID) e senha
-    connect_to_wifi("SSID da rede", "Senha da rede");
+    connect_to_wifi(wifi_ssid, wifi_password);
+    mqtt_setup("bitdog1", "ip_rede", "aluno", "senha123"); 
 
-    // Configura o cliente MQTT
-    // Parâmetros: ID do cliente, IP do broker, usuário, senha
-    mqtt_setup("bitdog1", "IP do broker", "aluno", "senha123");
+    // Buffer para a mensagem JSON
+    char mensagem[64];
+    // Buffer para mensagem criptografada
+    uint8_t criptografada[64];
 
-    // Mensagem original a ser enviada
-    const char *mensagem = "26.5";
-    // Buffer para mensagem criptografada (16 bytes)
-    uint8_t criptografada[16];
-    // Criptografa a mensagem usando XOR com chave 42
-    xor_encrypt((uint8_t *)mensagem, criptografada, strlen(mensagem), 42);
-
-    // Loop principal do programa
     while (true) {
-        // Publica a mensagem original (não criptografada)
-        mqtt_comm_publish("escola/sala1/temperatura", mensagem, strlen(mensagem));
+        // Formata a mensagem JSON com valor e timestamp
+        snprintf(mensagem, sizeof(mensagem), "{\"valor\":26.5,\"ts\":%lu}", (unsigned long)time(NULL));
         
-        // Alternativa: Publica a mensagem criptografada (atualmente comentada)
-        // mqtt_comm_publish("escola/sala1/temperatura", criptografada, strlen(mensagem));
+        // Criptografa a mensagem usando XOR com chave 42
+        xor_encrypt((const uint8_t *)mensagem, criptografada, strlen(mensagem), 42);
         
-        // Aguarda 5 segundos antes da próxima publicação
-        sleep_ms(5000);
+        // Publica a mensagem criptografada
+        mqtt_comm_publish("escola/sala1/temperatura", criptografada, strlen(mensagem));
+        
+        sleep_ms(1000); 
     }
-    return 0;
 }
-
-/* 
- * Comandos de terminal para testar o MQTT:
- * 
- * Inicia o broker MQTT com logs detalhados:
- * mosquitto -c mosquitto.conf -v
- * 
- * Assina o tópico de temperatura (recebe mensagens):
- * mosquitto_sub -h localhost -p 1883 -t "escola/sala1/temperatura" -u "aluno" -P "senha123"
- * 
- * Publica mensagem de teste no tópico de temperatura:
- * mosquitto_pub -h localhost -p 1883 -t "escola/sala1/temperatura" -u "aluno" -P "senha123" -m "26.6"
- */

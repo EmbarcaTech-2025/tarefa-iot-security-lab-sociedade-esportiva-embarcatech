@@ -98,8 +98,4 @@
 // Isso ajuda a controlar o fluxo de mensagens no protocolo MQTT
 #define MQTT_REQ_MAX_IN_FLIGHT  (5)
 
-// Estas definições são parte da personalização do LWIP para atender às necessidades específicas de um projeto, 
-// permitindo ajustar o comportamento da pilha de rede e do cliente MQTT de acordo com os requisitos de memória, 
-// desempenho e funcionalidade do sistema embarcado.
-
 #endif /* __LWIPOPTS_H__ */
