@@ -165,6 +165,16 @@ Para identificar a porta serial:
 ```
 ls /dev/tty*
 ```
+**Etapa final: relato e análise**
+
+Quais técnicas são escaláveis?
+
+As técnicas escaláveis incluem conexão Wi-Fi com configuração centralizada, autenticação básica no Mosquitto com gerenciamento automatizado de credenciais, e proteção contra replays com timestamps sincronizados via NTP. A criptografia XOR é limitada e deve ser substituída por AES para redes escolares maiores. Estruturas de tópicos hierárquicas e brokers em cluster suportam múltiplas BitdogLab eficientemente.
+
+Como aplicá-las com várias BitDogLab em rede escolar?
+
+Para aplicar essas técnicas em uma rede escolar, é necessário considerar gerenciamento centralizado, segurança robusta (AES), sincronização de tempo com protocolo NTP, estrutura de tópicos hierárquica, redundância e balanceamento, uma infraestrutura de rede adequada, monitoramento e depuração e automação de configuração. Isso garante que o sistema seja gerenciável e seguro, mesmo com muitas BitDogLab. É importante utilizar DHCP para atribuir endereços IP automaticamente às BitdogLab, reduzindo a configuração manual.
+
 
 ### Como Compilar no Linux:
 
